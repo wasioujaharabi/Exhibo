@@ -4,7 +4,7 @@
     <h1>Posts</h1>
     @if(count($posts)>0)
         @foreach ($posts as $post) 
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 50rem;">
                 <a href="/posts/{{$post-> id}}"><img src="/storage/photos/{{$post->photo}}" class="card-img-top" alt="...">
                 <div class="card-body">
                 <p class="card-text">{{$post->title}}</p>

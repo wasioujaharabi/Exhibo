@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Post;
+use App\Profile;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $posts = Post::all()->where('user_id',$user_id);
-        return view('home',['posts'=>$posts]);
+        $profile = Profile::all()->where('profile_id',$user_id);
+        return view('home',['posts'=>$posts,'profile'=>$profile]);
     }
 }

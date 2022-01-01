@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Post;
+use App\Review;
+use Auth;
+
 
 class PostsController extends Controller
 {
@@ -14,7 +18,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except'=>'index']);
     }
 
     public function index()
@@ -82,8 +86,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = post::find($id);
-        return view('posts.show')->with('posts',$post);
+        $post = Post::find($id);
+        $reviews =Review::where('post_id',$id)->get();
+       
+        return view('posts.show',['posts'=>$post,'reviews'=>$reviews]);
     }
 
     /**
@@ -142,4 +148,19 @@ class PostsController extends Controller
         $post -> delete();
         return redirect('/posts')->with('success', 'Post removed');
     }
+
+    public function Review($id){
+        $review=Review::where('post_id',$id)->where('user_id',Auth::id())->get();
+        if(count($review)<1){
+            return view('addreview',['post_id'=>$id]);
+        }
+        else{
+            // return $review[1];
+            return view('EditReview',['post_id'=>$id,'review'=>$review]);
+        }
+    }
+    public function download($id){
+        $file= Post::find($id);
+        return response()->download(storage_path('app\public\photos\\'. $file->photo));
+     }
 }

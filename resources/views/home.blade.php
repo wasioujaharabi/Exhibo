@@ -18,6 +18,11 @@
 
                     <div><a href="/posts/create" class="btn btn-success">Create a Post</a></div>
                     
+                        
+
+                    
+                    
+                    
                     <div class="alert alert-primary" role="alert">
                         Your Posts
                       </div>

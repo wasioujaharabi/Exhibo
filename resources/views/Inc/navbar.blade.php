@@ -15,28 +15,35 @@
             </ul>
 
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
+              @if(!Auth::guest())
+                <li class="nav-item">
                 <a class="nav-link active" aria-current="view" href="/home">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/photographers">Photographers</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/posts">Feed</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/services">Services</a>
-              </li>
+              @endif
+              
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/photographers">Photographers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/about">About</a>
+                </li>
+
+              
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/posts">Feed</a>
+                </li>
+                @if(!Auth::guest())
+                <li class="nav-item">
+                    <li><a class="nav-link active" aria-current="page" href="/profiles">profile</a></li>
+                    <li>
+              @endif         
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="/posts">{{ __('Guest Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
@@ -60,6 +67,8 @@
                             @csrf
                         </form>
                     </div>
+                  
+                    
                 </li>
                 @endguest
             </ul>

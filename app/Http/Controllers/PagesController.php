@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Profile;
 
 class PagesController extends Controller
 {
@@ -22,6 +23,7 @@ class PagesController extends Controller
     }
     public function photographers(){
         $user = User::orderBy('id','desc')->get();
-        return view('pages.photographers')-> with('users',$user);
+        $profile = Profile::orderby('first_name','desc')->get();
+        return view('pages.photographers')-> with('profiles',$profile);
     }
 }

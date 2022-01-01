@@ -4,14 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Profile extends Model
 {
-    protected $table = 'posts';
-    public $primaryKey = 'id';
-    public $timestamps = true;
+    protected $table = 'profiles';
 
+    public $primarykey = 'id';
+    public $timestamp = true;
+
+
+    
     public function user(){
         return $this-> belongsTo('App\User');
     }
-    
 }
